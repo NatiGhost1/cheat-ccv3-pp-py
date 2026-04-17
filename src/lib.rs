@@ -1,42 +1,52 @@
-use cheat_ccv3_pp::{Beatmap, BeatmapExt, DifficultyAttributes, PerformanceAttributes};
+//! cheat-ccv3-pp-py: Python bindings for cheat-ccv3-pp osu! calculator
+//!
+//! A high-performance Python library for calculating osu! difficulty ratings and
+//! performance points using the cheat-ccv3-pp Rust implementation.
+//!
+//! # Example
+//!
+//! ```python
+//! from cheat_ccv3_pp_py import Beatmap, Difficulty, Performance
+//!
+//! # Parse a beatmap
+//! beatmap = Beatmap(path="map.osu")
+//!
+//! # Calculate star rating
+//! diff = Difficulty(beatmap, mods=8)
+//! result = diff.calculate()
+//! print(f"Stars: {result.stars}")
+//!
+//! # Calculate performance points
+//! perf = Performance(beatmap, accuracy=98.5, misses=1)
+//! pp = perf.calculate()
+//! print(f"PP: {pp.pp}")
+//! ```
+
 use pyo3::prelude::*;
-use pyo3::types::{PyBytes, PyDict};
 
-// ==================== EXCEPTIONS ====================
-create_exception!(cheat_ccv3_pp_py, ParseError, pyo3::exceptions::PyValueError);
-create_exception!(cheat_ccv3_pp_py, ArgsError, pyo3::exceptions::PyTypeError);
+// ==================== MODULES ====================
 
-// ==================== MACRO DEFINITIONS ====================
+pub mod attributes;
+pub mod beatmap;
+pub mod difficulty;
+pub mod error;
+pub mod macros;
+pub mod mode;
+pub mod mods;
+pub mod performance;
+pub mod score_state;
+pub mod strains;
 
-/// Macro for extracting optional keyword arguments with type checking
-macro_rules! extract_kwarg {
-    ($kwargs:expr, $key:expr, $type:ty) => {{
-        $kwargs
-            .get_item($key)
-            .and_then(|v| v.extract::<$type>().ok())
-    }};
-}
+// ==================== EXPORTS ====================
 
-/// Macro for creating property getters with match patterns
-macro_rules! mode_specific_getter {
-    ($inner:expr, $osu_field:ident, $taiko_field:ident, $catch_field:ident, $mania_field:ident) => {{
-        match $inner {
-            DifficultyAttributes::Osu(attrs) => Some(attrs.$osu_field),
-            DifficultyAttributes::Taiko(attrs) => Some(attrs.$taiko_field),
-            DifficultyAttributes::Catch(attrs) => Some(attrs.$catch_field),
-            DifficultyAttributes::Mania(attrs) => Some(attrs.$mania_field),
-        }
-    }};
-}
-
-// ==================== PYTHON CLASSES ====================
-
-/// Beatmap wrapper for .osu file parsing and manipulation
-#[pyclass(name = "Beatmap")]
-#[derive(Clone)]
-pub struct PyBeatmap {
-    inner: Beatmap,
-}
+pub use attributes::{PyDifficultyAttributes, PyPerformanceAttributes};
+pub use beatmap::PyBeatmap;
+pub use difficulty::PyDifficulty;
+pub use error::{ArgsError, ParseError};
+pub use mods::PyGameMods;
+pub use performance::PyPerformance;
+pub use score_state::PyScoreState;
+pub use strains::PyStrains;
 
 /// Difficulty calculator with builder pattern
 #[pyclass(name = "Difficulty")]
