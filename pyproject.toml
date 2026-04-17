@@ -1,0 +1,22 @@
+[build-system]
+requires = ["maturin>=1,<2"]
+build-backend = "maturin"
+
+[project]
+name = "cheat-ccv3-pp-py"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "Python bindings for the cheat-ccv3-pp osu! PP calculator."
+readme = "README.md"
+license = "MIT"
+keywords = ["osu", "pp", "performance", "stars", "difficulty"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Rust",
+]
+
+[tool.maturin]
+bindings = "pyo3"

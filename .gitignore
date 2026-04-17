@@ -1,0 +1,9 @@
+target/
+**/__pycache__/
+*.pyc
+*.pyd
+*.so
+*.dll
+*.dylib
+build/
+.maturin/
