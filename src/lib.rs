@@ -330,6 +330,136 @@ impl PyDifficultyAttributes {
     fn max_combo(&self) -> usize {
         self.inner.max_combo()
     }
+
+    #[getter]
+    fn aim(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.aim),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn speed(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.speed),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn flashlight(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.flashlight),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn slider_factor(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.slider_factor),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn speed_note_count(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.speed_note_count),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn ar(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.ar),
+            DifficultyAttributes::Catch(attrs) => Some(attrs.ar),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn od(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.od),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn hp(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.hp),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn stamina(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Taiko(attrs) => Some(attrs.stamina),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn rhythm(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Taiko(attrs) => Some(attrs.rhythm),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn color(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Taiko(attrs) => Some(attrs.colour),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn peak(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Taiko(attrs) => Some(attrs.peak),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn hit_window(&self) -> Option<f64> {
+        match &self.inner {
+            DifficultyAttributes::Taiko(attrs) => Some(attrs.hit_window),
+            DifficultyAttributes::Mania(attrs) => Some(attrs.hit_window),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_fruits(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Catch(attrs) => Some(attrs.n_fruits),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_droplets(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Catch(attrs) => Some(attrs.n_droplets),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_tiny_droplets(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Catch(attrs) => Some(attrs.n_tiny_droplets),
+            _ => None,
+        }
+    }
 }
 
 #[pymethods]
@@ -347,6 +477,62 @@ impl PyPerformanceAttributes {
     #[getter]
     fn max_combo(&self) -> usize {
         self.inner.max_combo()
+    }
+
+    #[getter]
+    fn pp_acc(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Osu(attrs) => Some(attrs.pp_acc),
+            PerformanceAttributes::Taiko(attrs) => Some(attrs.pp_acc),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn pp_aim(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Osu(attrs) => Some(attrs.pp_aim),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn pp_speed(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Osu(attrs) => Some(attrs.pp_speed),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn pp_flashlight(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Osu(attrs) => Some(attrs.pp_flashlight),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn pp_difficulty(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Taiko(attrs) => Some(attrs.pp_difficulty),
+            PerformanceAttributes::Mania(attrs) => Some(attrs.pp_difficulty),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn effective_miss_count(&self) -> Option<f64> {
+        match &self.inner {
+            PerformanceAttributes::Osu(attrs) => Some(attrs.effective_miss_count),
+            PerformanceAttributes::Taiko(attrs) => Some(attrs.effective_miss_count),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn difficulty(&self) -> PyDifficultyAttributes {
+        self.inner.difficulty_attributes().into()
     }
 }
 
