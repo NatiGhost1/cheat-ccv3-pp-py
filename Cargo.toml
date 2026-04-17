@@ -5,8 +5,11 @@ edition = "2021"
 authors = ["NatiGhost1 <noreply@example.com>"]
 license = "MIT"
 readme = "README.md"
-description = "Python wrapper for the cheat-ccv3-pp osu! PP and star calculator."
-repository = "https://github.com/NatiGhost1/cheat-ccv3-pp"
+description = "Python bindings for the cheat-ccv3-pp osu! PP and star rating calculator"
+repository = "https://github.com/NatiGhost1/cheat-ccv3-pp-py"
+homepage = "https://github.com/NatiGhost1/cheat-ccv3-pp"
+keywords = ["osu", "pp", "performance", "stars", "difficulty"]
+categories = ["api-bindings", "games"]
 
 [lib]
 name = "cheat_ccv3_pp_py"
@@ -20,3 +23,6 @@ cheat-ccv3-pp = { git = "https://github.com/NatiGhost1/cheat-ccv3-pp.git", branc
 lto = true
 panic = "abort"
 codegen-units = 1
+opt-level = 3
+strip = true
+

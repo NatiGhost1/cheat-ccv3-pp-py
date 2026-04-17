@@ -1,4 +1,10 @@
+# Rust
 target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# Python
 **/__pycache__/
 *.pyc
 *.pyd
@@ -6,4 +12,57 @@ target/
 *.dll
 *.dylib
 build/
+dist/
+*.egg-info/
+.Python
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+.tox/
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Maturin
 .maturin/
+*.whl
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Testing
+htmlcov/
+.tox/
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+
+# Local development
+.env.local
+*.local
+
