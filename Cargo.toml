@@ -14,7 +14,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.28", features = ["extension-module", "macros"] }
-cheat-ccv3-pp = { git = "https://github.com/NatiGhost1/cheat-ccv3-pp.git", tag = "0.30.0" }
+cheat-ccv3-pp = { git = "https://github.com/NatiGhost1/cheat-ccv3-pp.git", branch = "main" }
 
 [profile.release]
 lto = true

@@ -134,6 +134,21 @@ impl PyBeatmap {
         self.inner.bpm()
     }
 
+    #[getter]
+    fn n_circles(&self) -> u32 {
+        self.inner.n_circles
+    }
+
+    #[getter]
+    fn n_sliders(&self) -> u32 {
+        self.inner.n_sliders
+    }
+
+    #[getter]
+    fn n_spinners(&self) -> u32 {
+        self.inner.n_spinners
+    }
+
     fn pp(&self) -> PyPerformance {
         PyPerformance::new(self.inner.clone())
     }
@@ -457,6 +472,46 @@ impl PyDifficultyAttributes {
     fn n_tiny_droplets(&self) -> Option<usize> {
         match &self.inner {
             DifficultyAttributes::Catch(attrs) => Some(attrs.n_tiny_droplets),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_circles(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.n_circles),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_sliders(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.n_sliders),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn n_spinners(&self) -> Option<usize> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.n_spinners),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn local_sr_per_minute(&self) -> Option<Vec<f64>> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.local_sr_per_minute.clone()),
+            _ => None,
+        }
+    }
+
+    #[getter]
+    fn local_sr_per_15s(&self) -> Option<Vec<f64>> {
+        match &self.inner {
+            DifficultyAttributes::Osu(attrs) => Some(attrs.local_sr_per_15s.clone()),
             _ => None,
         }
     }
